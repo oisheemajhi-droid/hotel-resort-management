@@ -1,15 +1,19 @@
 from flask import Flask, render_template, request, redirect
 import mysql.connector
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
 
 
 # Connect to MySQL
 db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="p@ssw0rd@2007",
-    database="hotel_resort_management"
+    host=os.getenv("DB_HOST", "localhost"),
+    user=os.getenv("DB_USER", "root"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME", "hotel_resort_management"),
+    port=int(os.getenv("DB_PORT", "3306"))
 )
 
 
