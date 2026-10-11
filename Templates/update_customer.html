@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Update Customer - Hotel Resort Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>✏️ Update Customer</h1>
+
+        <p class="subtitle">
+            Update customer information
+        </p>
+
+        <form method="POST">
+
+            <input type="text"
+                   name="first_name"
+                   value="{{ customer[1] }}"
+                   placeholder="First Name"
+                   required>
+
+            <br><br>
+
+            <input type="text"
+                   name="last_name"
+                   value="{{ customer[2] }}"
+                   placeholder="Last Name"
+                   required>
+
+            <br><br>
+
+            <input type="email"
+                   name="email"
+                   value="{{ customer[3] }}"
+                   placeholder="Email">
+
+            <br><br>
+
+            <input type="text"
+                   name="contact_number"
+                   value="{{ customer[4] }}"
+                   placeholder="Contact Number">
+
+            <br><br>
+
+            <input type="text"
+                   name="city"
+                   value="{{ customer[5] }}"
+                   placeholder="City">
+
+            <br><br>
+
+            <input type="date"
+                   name="registration_date"
+                   value="{{ customer[6] }}">
+
+            <br><br>
+
+            <select name="gender">
+
+                <option value="">Select Gender</option>
+
+                <option value="Male"
+                    {% if customer[7] == "Male" %}selected{% endif %}>
+                    Male
+                </option>
+
+                <option value="Female"
+                    {% if customer[7] == "Female" %}selected{% endif %}>
+                    Female
+                </option>
+
+                <option value="Other"
+                    {% if customer[7] == "Other" %}selected{% endif %}>
+                    Other
+                </option>
+
+            </select>
+
+            <br><br>
+
+            <button type="submit" class="main-button">
+                💾 Save Changes
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="/customers" class="back-button">
+            ← Back to Customers
+        </a>
+
+    </div>
+
+</body>
+
+</html>

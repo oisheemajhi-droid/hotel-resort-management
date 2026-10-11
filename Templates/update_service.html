@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Update Service - Hotel Resort Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>✏️ Update Service</h1>
+
+        <p class="subtitle">
+            Update service information
+        </p>
+
+
+        <form method="POST">
+
+            <label>Service Name:</label>
+
+            <br>
+
+            <input type="text"
+                   name="service_name"
+                   value="{{ service[1] }}"
+                   required>
+
+            <br><br>
+
+
+            <label>Service Description:</label>
+
+            <br>
+
+            <input type="text"
+                   name="service_description"
+                   value="{{ service[2] }}">
+
+            <br><br>
+
+
+            <label>Service Price:</label>
+
+            <br>
+
+            <input type="number"
+                   name="service_price"
+                   value="{{ service[3] }}"
+                   step="0.01"
+                   required>
+
+            <br><br>
+
+
+            <button type="submit">
+                💾 Save Changes
+            </button>
+
+        </form>
+
+
+        <br><br>
+
+
+        <a href="/services" class="back-button">
+            ← Back to Services
+        </a>
+
+    </div>
+
+</body>
+
+</html>

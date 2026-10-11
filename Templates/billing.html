@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Billing - Hotel Resort Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>💳 Billing</h1>
+
+        <p class="subtitle">
+            Manage hotel payments and billing details
+        </p>
+
+
+        <!-- Search Payment -->
+
+        <h2>Search Payment</h2>
+
+        <form method="GET" action="/billing">
+
+            <input type="text"
+                   name="search"
+                   placeholder="Search by Payment ID or Booking ID">
+
+            <button type="submit">
+                🔍 Search
+            </button>
+
+        </form>
+
+
+        <br>
+
+
+        <!-- Add New Payment -->
+
+        <h2>Add New Payment</h2>
+
+        <form method="POST" action="/add_payment">
+
+            <input type="number"
+                   name="booking_id"
+                   placeholder="Booking ID"
+                   required>
+
+            <br><br>
+
+
+            <label>Payment Date:</label>
+
+            <br>
+
+            <input type="date"
+                   name="payment_date"
+                   required>
+
+            <br><br>
+
+
+            <input type="number"
+                   name="room_charge"
+                   placeholder="Room Charge"
+                   step="0.01"
+                   required>
+
+            <br><br>
+
+
+            <input type="number"
+                   name="service_charge"
+                   placeholder="Service Charge"
+                   step="0.01"
+                   required>
+
+            <br><br>
+
+
+            <input type="number"
+                   name="total_amount"
+                   placeholder="Total Amount"
+                   step="0.01"
+                   required>
+
+            <br><br>
+
+
+            <select name="payment_method" required>
+
+                <option value="">
+                    Select Payment Method
+                </option>
+
+                <option value="Cash">
+                    Cash
+                </option>
+
+                <option value="Card">
+                    Card
+                </option>
+
+                <option value="UPI">
+                    UPI
+                </option>
+
+                <option value="Net Banking">
+                    Net Banking
+                </option>
+
+            </select>
+
+            <br><br>
+
+
+            <select name="payment_status" required>
+
+                <option value="Pending">
+                    Pending
+                </option>
+
+                <option value="Paid">
+                    Paid
+                </option>
+
+                <option value="Failed">
+                    Failed
+                </option>
+
+                <option value="Refunded">
+                    Refunded
+                </option>
+
+            </select>
+
+            <br><br>
+
+
+            <button type="submit">
+                ➕ Add Payment
+            </button>
+
+        </form>
+
+
+        <br><br>
+
+
+        <!-- Payment Details -->
+
+        <h2>Payment Details</h2>
+
+        <table border="1"
+               cellpadding="10"
+               cellspacing="0">
+
+            <tr>
+
+                <th>Payment ID</th>
+
+                <th>Booking ID</th>
+
+                <th>Payment Date</th>
+
+                <th>Room Charge</th>
+
+                <th>Service Charge</th>
+
+                <th>Total Amount</th>
+
+                <th>Payment Method</th>
+
+                <th>Payment Status</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+
+            {% for payment in payments %}
+
+            <tr>
+
+                <td>{{ payment[0] }}</td>
+
+                <td>{{ payment[1] }}</td>
+
+                <td>{{ payment[2] }}</td>
+
+                <td>₹{{ payment[3] }}</td>
+
+                <td>₹{{ payment[4] }}</td>
+
+                <td>₹{{ payment[5] }}</td>
+
+                <td>{{ payment[6] }}</td>
+
+                <td>{{ payment[7] }}</td>
+
+                <td>
+
+                    <a href="/update_payment/{{ payment[0] }}">
+                        ✏️ Update
+                    </a>
+
+                    <br><br>
+
+                    <a href="/delete_payment/{{ payment[0] }}"
+                       onclick="return confirm('Are you sure you want to delete this payment?');">
+                        🗑️ Delete
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+
+        <br><br>
+
+
+        <!-- Back to Home -->
+
+        <a href="/" class="back-button">
+            ← Back to Home
+        </a>
+
+    </div>
+
+</body>
+
+</html>

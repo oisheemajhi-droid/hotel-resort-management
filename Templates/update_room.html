@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Update Room - Hotel Resort Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>✏️ Update Room</h1>
+
+        <p class="subtitle">
+            Update room information
+        </p>
+
+        <form method="POST">
+
+            <input type="text"
+                   name="room_number"
+                   value="{{ room[1] }}"
+                   placeholder="Room Number"
+                   required>
+
+            <br><br>
+
+            <input type="number"
+                   name="room_type_id"
+                   value="{{ room[2] }}"
+                   placeholder="Room Type ID"
+                   required>
+
+            <br><br>
+
+            <input type="number"
+                   name="floor_number"
+                   value="{{ room[3] }}"
+                   placeholder="Floor Number"
+                   required>
+
+            <br><br>
+
+            <select name="room_status" required>
+
+                <option value="Available"
+                    {% if room[4] == "Available" %}selected{% endif %}>
+                    Available
+                </option>
+
+                <option value="Occupied"
+                    {% if room[4] == "Occupied" %}selected{% endif %}>
+                    Occupied
+                </option>
+
+            </select>
+
+            <br><br>
+
+            <input type="text"
+                   name="maintenance_status"
+                   value="{{ room[5] }}"
+                   placeholder="Maintenance Status">
+
+            <br><br>
+
+            <button type="submit" class="main-button">
+                💾 Save Changes
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="/rooms" class="back-button">
+            ← Back to Rooms
+        </a>
+
+    </div>
+
+</body>
+
+</html>

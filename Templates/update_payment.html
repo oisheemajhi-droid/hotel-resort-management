@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Update Payment - Hotel Resort Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>✏️ Update Payment</h1>
+
+        <p class="subtitle">
+            Update payment and billing information
+        </p>
+
+
+        <form method="POST">
+
+
+            <label>Booking ID:</label>
+
+            <br>
+
+            <input type="number"
+                   name="booking_id"
+                   value="{{ payment[1] }}"
+                   required>
+
+            <br><br>
+
+
+            <label>Payment Date:</label>
+
+            <br>
+
+            <input type="date"
+                   name="payment_date"
+                   value="{{ payment[2] }}"
+                   required>
+
+            <br><br>
+
+
+            <label>Room Charge:</label>
+
+            <br>
+
+            <input type="number"
+                   name="room_charge"
+                   value="{{ payment[3] }}"
+                   step="0.01"
+                   required>
+
+            <br><br>
+
+
+            <label>Service Charge:</label>
+
+            <br>
+
+            <input type="number"
+                   name="service_charge"
+                   value="{{ payment[4] }}"
+                   step="0.01"
+                   required>
+
+            <br><br>
+
+
+            <label>Total Amount:</label>
+
+            <br>
+
+            <input type="number"
+                   name="total_amount"
+                   value="{{ payment[5] }}"
+                   step="0.01"
+                   required>
+
+            <br><br>
+
+
+            <label>Payment Method:</label>
+
+            <br>
+
+            <select name="payment_method" required>
+
+                <option value="Cash"
+                    {% if payment[6] == "Cash" %}selected{% endif %}>
+                    Cash
+                </option>
+
+                <option value="Card"
+                    {% if payment[6] == "Card" %}selected{% endif %}>
+                    Card
+                </option>
+
+                <option value="UPI"
+                    {% if payment[6] == "UPI" %}selected{% endif %}>
+                    UPI
+                </option>
+
+                <option value="Net Banking"
+                    {% if payment[6] == "Net Banking" %}selected{% endif %}>
+                    Net Banking
+                </option>
+
+            </select>
+
+            <br><br>
+
+
+            <label>Payment Status:</label>
+
+            <br>
+
+            <select name="payment_status" required>
+
+                <option value="Pending"
+                    {% if payment[7] == "Pending" %}selected{% endif %}>
+                    Pending
+                </option>
+
+                <option value="Paid"
+                    {% if payment[7] == "Paid" %}selected{% endif %}>
+                    Paid
+                </option>
+
+                <option value="Failed"
+                    {% if payment[7] == "Failed" %}selected{% endif %}>
+                    Failed
+                </option>
+
+                <option value="Refunded"
+                    {% if payment[7] == "Refunded" %}selected{% endif %}>
+                    Refunded
+                </option>
+
+            </select>
+
+            <br><br>
+
+
+            <button type="submit">
+                💾 Save Changes
+            </button>
+
+        </form>
+
+
+        <br><br>
+
+
+        <a href="/billing" class="back-button">
+            ← Back to Billing
+        </a>
+
+    </div>
+
+</body>
+
+</html>

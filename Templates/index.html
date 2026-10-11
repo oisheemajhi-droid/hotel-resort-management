@@ -1,0 +1,467 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grand Ocean Resort - Hotel Resort Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #02191d;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .resort-home {
+            min-height: 100vh;
+            padding: 35px 50px 45px;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    rgba(2, 25, 29, 0.35),
+                    rgba(2, 25, 29, 0.88)
+                ),
+                url("{{ url_for('static', filename='resort-dashboard.png') }}")
+                center top / cover no-repeat;
+        }
+
+        /* Dark overlay */
+        .resort-home::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(
+                    circle at 75% 20%,
+                    rgba(20, 150, 155, 0.18),
+                    transparent 35%
+                );
+            pointer-events: none;
+        }
+
+        .resort-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        /* TOP BRAND */
+
+        .brand {
+            text-align: left;
+            margin-bottom: 35px;
+        }
+
+        .brand-name {
+            color: #e8c86b;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .brand-subtitle {
+            color: #f6e7b0;
+            font-size: 11px;
+            letter-spacing: 4px;
+            margin-top: 4px;
+        }
+
+        /* HERO */
+
+        .hero-area {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .welcome-text {
+            color: #f2d47b;
+            font-size: 15px;
+            letter-spacing: 8px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .hero-title {
+            margin: 0;
+            color: #fffdf4;
+            font-family: 'Playfair Display', serif;
+            font-size: 58px;
+            line-height: 1.1;
+            text-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+
+        .hero-title span {
+            color: #e3b94f;
+        }
+
+        .hero-subtitle {
+            color: #ffffff;
+            font-size: 16px;
+            letter-spacing: 2px;
+            margin-top: 18px;
+        }
+
+        .hero-subtitle span {
+            color: #e2bd5a;
+            padding: 0 12px;
+        }
+
+        /* DASHBOARD */
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .dashboard-card {
+            min-height: 205px;
+            padding: 25px 20px;
+            border: 1px solid #d9b858;
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(4, 67, 73, 0.94),
+                    rgba(2, 35, 40, 0.94)
+                );
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.35),
+                inset 0 0 25px rgba(213,174,76,0.08);
+
+            text-decoration: none;
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .dashboard-card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(217, 184, 88, 0.05);
+            top: -90px;
+            right: -80px;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-8px);
+            border-color: #f0d47b;
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,0.5),
+                0 0 25px rgba(217,184,88,0.22);
+        }
+
+        /* ICON */
+
+        .card-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #07353b;
+            border: 2px solid #e2be5c;
+
+            font-size: 29px;
+
+            box-shadow:
+                0 0 15px rgba(225,190,92,0.18);
+
+            margin-bottom: 14px;
+        }
+
+        .dashboard-card h2 {
+            font-family: 'Playfair Display', serif;
+            color: #fffaf0;
+            font-size: 25px;
+            margin: 0 0 6px;
+        }
+
+        .dashboard-card p {
+            color: #d9e5e3;
+            font-size: 12px;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .arrow {
+            margin-top: 13px;
+
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+
+            background: #e0b94f;
+            color: #073238;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .dashboard-card:hover .arrow {
+            transform: translateX(5px);
+            background: #f3d77f;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            margin-top: 38px;
+            color: #e5c568;
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+
+        .footer::before {
+            content: "✦ ─────────────── ✦";
+            display: block;
+            margin-bottom: 10px;
+            color: #c8a644;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+
+            .resort-home {
+                padding: 30px 25px;
+            }
+
+            .hero-title {
+                font-size: 45px;
+            }
+
+            .dashboard {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .resort-home {
+                padding: 25px 15px;
+            }
+
+            .brand {
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 35px;
+            }
+
+            .welcome-text {
+                font-size: 11px;
+                letter-spacing: 4px;
+            }
+
+            .hero-subtitle {
+                font-size: 12px;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-card {
+                min-height: 180px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="resort-home">
+
+    <div class="resort-content">
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-name">
+                🏨 GRAND OCEAN RESORT
+            </div>
+
+            <div class="brand-subtitle">
+                LUXURY • COMFORT • MEMORIES
+            </div>
+
+        </div>
+
+
+        <!-- HERO -->
+
+        <div class="hero-area">
+
+            <div class="welcome-text">
+                WELCOME TO
+            </div>
+
+            <h1 class="hero-title">
+                Hotel Resort <span>Management</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Efficient Management
+                <span>✦</span>
+                Happier Guests
+                <span>✦</span>
+                A Better Tomorrow
+            </p>
+
+        </div>
+
+
+        <!-- DASHBOARD -->
+
+        <div class="dashboard">
+
+            <a href="/customers" class="dashboard-card">
+
+                <div class="card-icon">
+                    👤
+                </div>
+
+                <h2>Customers</h2>
+
+                <p>Manage Guest Information</p>
+
+                <div class="arrow">→</div>
+
+            </a>
+
+
+            <a href="/rooms" class="dashboard-card">
+
+                <div class="card-icon">
+                    🛏️
+                </div>
+
+                <h2>Rooms</h2>
+
+                <p>View & Manage Rooms</p>
+
+                <div class="arrow">→</div>
+
+            </a>
+
+
+            <a href="/bookings" class="dashboard-card">
+
+                <div class="card-icon">
+                    📅
+                </div>
+
+                <h2>Bookings</h2>
+
+                <p>Manage Reservations</p>
+
+                <div class="arrow">→</div>
+
+            </a>
+
+
+            <a href="/services" class="dashboard-card">
+
+                <div class="card-icon">
+                    🛎️
+                </div>
+
+                <h2>Services</h2>
+
+                <p>Manage Guest Services</p>
+
+                <div class="arrow">→</div>
+
+            </a>
+
+
+            <a href="/billing" class="dashboard-card">
+
+                <div class="card-icon">
+                    💳
+                </div>
+
+                <h2>Billing</h2>
+
+                <p>Process Payments & Invoices</p>
+
+                <div class="arrow">→</div>
+
+            </a>
+
+
+            <a href="/reports" class="dashboard-card">
+
+                <div class="card-icon">
+                    📊
+                </div>
+
+                <h2>Reports</h2>
+
+                <p>View Analytics & Insights</p>
+
+                <div class="arrow">→</div>
+
+            </a>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+            EXCEPTIONAL STAYS ✦ LASTING IMPRESSIONS
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+```

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rooms - Hotel Resort Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🛏️ Rooms</h1>
+
+        <p class="subtitle">
+            Manage hotel rooms
+        </p>
+
+       <h2>Search Rooms</h2>
+
+<form method="GET" action="/rooms">
+
+    <input type="text"
+           name="search"
+           placeholder="Room Number or Status">
+
+    <button type="submit" class="main-button">
+        🔍 Search
+    </button>
+
+</form>
+
+<br>
+
+<h2>Add New Room</h2>
+
+<form method="POST" action="/add_room">
+
+    <input type="text"
+           name="room_number"
+           placeholder="Room Number"
+           required>
+
+    <input type="number"
+           name="room_type_id"
+           placeholder="Room Type ID"
+           required>
+
+    <input type="number"
+           name="floor_number"
+           placeholder="Floor Number"
+           required>
+
+    <select name="room_status" required>
+        <option value="">Select Room Status</option>
+        <option value="Available">Available</option>
+        <option value="Occupied">Occupied</option>
+    </select>
+
+    <input type="text"
+           name="maintenance_status"
+           placeholder="Maintenance Status">
+
+    <button type="submit" class="main-button">
+        ➕ Add Room
+    </button>
+
+</form>
+
+<br>
+<h2>Room Details</h2>
+
+        <table border="1" cellpadding="10" cellspacing="0">
+
+            <tr>
+                <th>Room ID</th>
+                <th>Room Number</th>
+                <th>Room Type ID</th>
+                <th>Floor</th>
+                <th>Room Status</th>
+                <th>Maintenance Status</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for room in rooms %}
+
+            <tr>
+                <td>{{ room[0] }}</td>
+                <td>{{ room[1] }}</td>
+                <td>{{ room[2] }}</td>
+                <td>{{ room[3] }}</td>
+                <td>{{ room[4] }}</td>
+                <td>{{ room[5] }}</td>
+                <td>
+    <td>
+    <a href="/update_room/{{ room[0] }}">
+        ✏️ Update
+    </a>
+
+    <br><br>
+
+    <a href="/delete_room/{{ room[0] }}"
+       onclick="return confirm('Are you sure you want to delete this room?');">
+        🗑️ Delete
+    </a>
+</td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        <br>
+
+        <a href="/" class="back-button">
+            ← Back to Home
+        </a>
+
+    </div>
+
+</body>
+
+</html>

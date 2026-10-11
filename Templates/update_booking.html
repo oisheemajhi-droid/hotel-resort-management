@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Update Booking - Hotel Resort Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>✏️ Update Booking</h1>
+
+        <p class="subtitle">
+            Update booking information
+        </p>
+
+
+        <form method="POST">
+
+
+            <label>Customer ID:</label>
+
+            <br>
+
+            <input type="number"
+                   name="customer_id"
+                   value="{{ booking[1] }}"
+                   required>
+
+            <br><br>
+
+
+            <label>Room ID:</label>
+
+            <br>
+
+            <input type="number"
+                   name="room_id"
+                   value="{{ booking[2] }}"
+                   required>
+
+            <br><br>
+
+
+            <label>Booking Date:</label>
+
+            <br>
+
+            <input type="date"
+                   name="booking_date"
+                   value="{{ booking[3] }}"
+                   required>
+
+            <br><br>
+
+
+            <label>Check In:</label>
+
+            <br>
+
+            <input type="date"
+                   name="check_in"
+                   value="{{ booking[4] }}"
+                   required>
+
+            <br><br>
+
+
+            <label>Check Out:</label>
+
+            <br>
+
+            <input type="date"
+                   name="check_out"
+                   value="{{ booking[5] }}"
+                   required>
+
+            <br><br>
+
+
+            <label>Number of Guests:</label>
+
+            <br>
+
+            <input type="number"
+                   name="number_of_guests"
+                   value="{{ booking[6] }}"
+                   required>
+
+            <br><br>
+
+
+            <label>Booking Status:</label>
+
+            <br>
+
+            <select name="booking_status" required>
+
+                <option value="Confirmed"
+                    {% if booking[7] == "Confirmed" %}selected{% endif %}>
+                    Confirmed
+                </option>
+
+                <option value="Checked In"
+                    {% if booking[7] == "Checked In" %}selected{% endif %}>
+                    Checked In
+                </option>
+
+                <option value="Checked Out"
+                    {% if booking[7] == "Checked Out" %}selected{% endif %}>
+                    Checked Out
+                </option>
+
+                <option value="Cancelled"
+                    {% if booking[7] == "Cancelled" %}selected{% endif %}>
+                    Cancelled
+                </option>
+
+            </select>
+
+            <br><br>
+
+
+            <button type="submit">
+                💾 Save Changes
+            </button>
+
+        </form>
+
+
+        <br><br>
+
+
+        <a href="/bookings" class="back-button">
+            ← Back to Bookings
+        </a>
+
+    </div>
+
+</body>
+
+</html>
